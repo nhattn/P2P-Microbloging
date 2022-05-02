@@ -5,6 +5,8 @@ bài viết nhỏ, những thủ thuật nhỏ trong các lĩnh vực về khoa 
 kỹ thuật, kinh tế xã hội thoát ra khỏi việc áp đặt của nhà cung
 cấp mạng thâu tóm sự chia sẻ cộng đồng.
 
+![](https://github.com/nhattn/P2P-Microbloging/blob/main/images/automation-peer-programming.jpg?raw=true)
+
 ## Ý tưởng
 
 Sơ khai từ nhiều người với một hệ thống hạ tầng mạng được kiểm soát
@@ -31,7 +33,7 @@ tán thông tin lưu ý với việc chống phá cần phải có một mạng 
 chất tuyền truyền bạo động. Để nội dung chia sẻ được khách quan hơn
 
 
-- [P2P] (https://en.wikipedia.org/wiki/Peer-to-peer)
+- [P2P](https://en.wikipedia.org/wiki/Peer-to-peer)
 - [Blockchain](https://en.wikipedia.org/wiki/Blockchain)
 
 Ngoài ra các thuật toán máy học để đảm bảo cho quá trình dữ liệu khách
