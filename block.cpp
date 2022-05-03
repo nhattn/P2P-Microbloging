@@ -1,5 +1,6 @@
 /*
  * Copyright 2017 Dave Nash <https://github.com/knasher>
+ * Copyright 2022 Trần Ngọc Nhật <https://github.com/nhattn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -39,7 +40,7 @@ void Block::MineBlock(uint32_t nDifficulty)
     }
     cstr[nDifficulty] = '\0';
 
-    string str(cstr);
+    std::string str(cstr);
 
     do
     {
@@ -48,10 +49,10 @@ void Block::MineBlock(uint32_t nDifficulty)
     }
     while (sHash.substr(0, nDifficulty) != str);
 
-    cout << "Block mined: " << sHash << endl;
+    std::cout << "Block mined: " << sHash << std::endl;
 }
 
-inline string Block::_CalculateHash() const
+inline std::string Block::_CalculateHash() const
 {
     std::stringstream ss;
     ss << _nIndex << sPrevHash << _tTime << _sData << _nNonce;

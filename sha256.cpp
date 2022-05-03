@@ -8,6 +8,7 @@
  * http://www.ouah.org/ogay/sha2/
  *
  * Copyright (C) 2005, 2007 Olivier Gay <olivier.gay@a3.epfl.ch>
+ * Copyright 2022 Trần Ngọc Nhật <https://github.com/nhattn>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -163,7 +164,7 @@ std::string sha256(std::string input)
 
     char buf[2*SHA256::DIGEST_SIZE+1];
     buf[2*SHA256::DIGEST_SIZE] = 0;
-    for (int i = 0; i < SHA256::DIGEST_SIZE; i++)
+    for (unsigned int i = 0; i < SHA256::DIGEST_SIZE; i++)
         sprintf(buf+i*2, "%02x", digest[i]);
     return std::string(buf);
 }

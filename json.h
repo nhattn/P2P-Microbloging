@@ -1,6 +1,7 @@
 /*
  * Copyright 2015 Neil <https://github.com/nbsdx>
  * Copyright 2020 Hoa Thiên Vũ <https://github.com/hoathienvu8x>
+ * Copyright 2022 Trần Ngọc Nhật <https://github.com/nhattn>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -61,7 +62,7 @@ namespace {
                 case '\t': output += "\\t";  break;
                 default  : output += str[i]; break;
             }
-        return std::move( output );
+        return output;
     }
     // https://stackoverflow.com/a/35345427
     template < typename Type >
@@ -520,7 +521,7 @@ namespace {
         ++offset;
         consume_ws( str, offset );
         if( str[offset] == '}' ) {
-            ++offset; return std::move( Object );
+            ++offset; return Object;
         }
 
         while( true ) {
@@ -547,7 +548,7 @@ namespace {
             }
         }
 
-        return std::move( Object );
+        return Object;
     }
 
     JSON parse_array( const string &str, size_t &offset ) {
@@ -557,7 +558,7 @@ namespace {
         ++offset;
         consume_ws( str, offset );
         if( str[offset] == ']' ) {
-            ++offset; return std::move( Array );
+            ++offset; return Array;
         }
 
         while( true ) {
@@ -576,7 +577,7 @@ namespace {
             }
         }
 
-        return std::move( Array );
+        return Array;
     }
 
     JSON parse_string( const string &str, size_t &offset ) {
@@ -614,7 +615,7 @@ namespace {
         }
         ++offset;
         String = val;
-        return std::move( String );
+        return String;
     }
 
     JSON parse_number( const string &str, size_t &offset ) {
@@ -664,7 +665,7 @@ namespace {
             else
                 Number = std::stol( val );
         }
-        return std::move( Number );
+        return Number;
     }
 
     JSON parse_bool( const string &str, size_t &offset ) {
@@ -678,7 +679,7 @@ namespace {
             return std::move( JSON::Make( JSON::Class::Null ) );
         }
         offset += (Bool.ToBool() ? 4 : 5);
-        return std::move( Bool );
+        return Bool;
     }
 
     JSON parse_null( const string &str, size_t &offset ) {
@@ -688,7 +689,7 @@ namespace {
             return std::move( JSON::Make( JSON::Class::Null ) );
         }
         offset += 4;
-        return std::move( Null );
+        return Null;
     }
 
     JSON parse_next( const string &str, size_t &offset ) {
