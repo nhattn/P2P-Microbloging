@@ -46,3 +46,13 @@ không mong muốn có chút nào về việc tuyên truyền hay chống phá m
 hội hay một chính quyền nào. Nếu có tham gia cùng phát triển vui lòng
 không mang tính chất chính trị hoặc tôn giáo vào để thuyết giảng hoặc
 sử dụng với những mục đích như vậy
+
+## Blockchain
+
+Hoàn thành `Blockchain` nhưng quá trình mã hóa quá chậm sẽ làm ảnh hưởng
+tới việc sử dụng và chia sẻ dữ liệu cũng như giải mã, cần tham khảo mã
+nguồn của `git` để làm quá trình nén cũng như phân giải dữ liệu nhanh hơn.
+
+Có một điều cần lưu ý khi mà bài viết chia sẻ quá nhiều thì việc lưu trữ
+các khối dữ liệu sẽ làm mất RAM nhiều chỗ. vì vậy đoạn này phải làm phân
+trang.
