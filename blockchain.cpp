@@ -99,8 +99,12 @@ int BlockChain::replaceChain(json::JSON chain) {
     }
     for (int a = 1; a < chain["length"].ToInt(); a++ ){
         auto block = chain["data"][a];
+        #ifdef SALT_CIPHER
         std::string raw = cipher_encrypt(block["data"].stringify(), SALT_CIPHER);
         addBlock(block["index"].ToInt(), block["parent"].ToString(), block["hash"].ToString(), block["nonce"].ToString(), base64_url_encode(raw));
+        #else
+        addBlock(block["index"].ToInt(), block["parent"].ToString(), block["hash"].ToString(), block["nonce"].ToString(), block["data"].stringify());
+        #endif
     }
     return 1;
 }

@@ -34,8 +34,12 @@ Block::Block(int index, const std::string parent, const std::string hash, const 
     _parent = parent;
     _hash = hash;
     _nonce = nonce;
+    #ifdef SALT_CIPHER
     std::string raw = cipher_encrypt(data, SALT_CIPHER);
     _data = base64_url_encode(raw);
+    #else
+    _data = data;
+    #endif
     _time = std::time(nullptr);
 }
 
@@ -68,8 +72,12 @@ json::JSON Block::toJSON(void) {
         j["parent"] = _parent;
         j["nonce"] = _nonce;
         if (_data.size() > 0) {
+            #ifdef SALT_CIPHER
             std::string raw = base64_url_decode(_data);
             j["data"] = json::JSON::Load(cipher_decrypt(raw, SALT_CIPHER));
+            #else
+            j["data"] = json::JSON::Load(_data);
+            #endif
         } else {
             j["data"] = json::JSON();
         }
