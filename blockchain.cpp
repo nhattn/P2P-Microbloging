@@ -72,7 +72,7 @@ int BlockChain::getNumOfBlocks(void) {
     return (int)blockchain.size();
 }
 int BlockChain::addBlock(int index, std::string parent, std::string hash, std::string nonce, std::string data) {
-    std::string header = std::to_string(index) + parent + data + nonce;
+    std::string header = std::to_string(index) + parent + sha256(data) + nonce;
     if ( (!sha256(header).compare(hash)) && (hash.substr(0,2) == "00" ) && (index == (int)blockchain.size())) {
         blockchain.push_back(std::make_unique<Block>(index,parent,hash,nonce,data));
         return 1;
