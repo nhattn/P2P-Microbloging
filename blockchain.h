@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Dave Nash https://github.com/knasher
+ * Copyright (c) 2018 Timothy Ko https://github.com/tko22
  * Copyright (c) 2022 Trần Ngọc Nhật <https://github.com/nhattn>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
