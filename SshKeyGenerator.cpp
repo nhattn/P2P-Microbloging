@@ -37,6 +37,10 @@ struct public_key rsa_public_key(const struct RSA);
 
 int rsa_valid(const struct RSA);
 
+int modular(int base, unsigned int exp, unsigned int mod);
+std::string sha_encrypt(const std::string, const struct public_key);
+std::string sha_decrypt(const std::string, const struct private_key);
+
 int main(int argc, char **argv) {
     struct RSA rs = rsa_generator();
     if (!rsa_valid(rs)) {
@@ -49,6 +53,15 @@ int main(int argc, char **argv) {
     std::cout << "Toitient is: " << rs.r << std::endl;
     std::cout << "Public key is: (" << rs.m << "," << rs.r << ")" << std::endl;
     std::cout << "Private key is: " << rs.s << std::endl;
+
+    struct public_key pub = rsa_public_key(rs);
+    struct private_key pri = rsa_private_key(rs);
+
+    std::string text = "I am using template function and integer constraint on it.";
+    std::cout << "Text is: \n" << text << std::endl;
+    std::string encrypt = sha_encrypt(text, pub);
+    std::cout << "Encrypted is:\n" << encrypt << std::endl;
+    std::cout << "Decrypted is:\n" << sha_decrypt(encrypt, pri) << std::endl;
     return 0;
 }
 
@@ -149,4 +162,40 @@ int rsa_valid(const struct RSA rs) {
         return 0;
     }
     return 1;
+}
+int modular(int base, unsigned int exp, unsigned int mod) {
+    int x = 1;
+    long unsigned int i;
+    int power = base % mod;
+    for (i = 0; i < sizeof(int) * 8; i++) {
+        int least_sig_bit = 0x00000001 & (exp >> i);
+        if (least_sig_bit) {
+            x = (x * power) % mod;
+        }
+        power = (power * power) % mod;
+    }
+    return x;
+}
+std::string sha_encrypt(const std::string s, const struct public_key rs) {
+    std::vector<uint8_t> ret;
+    //std::cout << "R: " << rs.r << std::endl;
+    //std::cout << "M: " << rs.m << std::endl;
+    for (unsigned int i = 0; i < s.size(); i++) {
+        long long int e = modular(s.at(i), rs.r, rs.m);
+        std::cout << s.at(i) << "("<< (int)s.at(i) << ")" << ": " << e << std::endl;
+        ret.push_back((char)e);
+    }
+    return std::string(ret.begin(), ret.end());
+}
+std::string sha_decrypt(const std::string s, const struct private_key rs) {
+    std::vector<uint8_t> ret;
+    int m = rs.p * rs.q;
+    //std::cout << "s: " << rs.s << std::endl;
+    //std::cout << "M: " << m << std::endl;
+    for (unsigned int i = 0; i < s.size(); i++) {
+        long long int d = modular(s.at(i), rs.s, m);
+        std::cout << s.at(i) << ": "<< d << "("<< (char)d << ")" << std::endl;
+        ret.push_back((char)d);
+    }
+    return std::string(ret.begin(), ret.end());
 }
